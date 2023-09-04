@@ -16,12 +16,14 @@ CloudWeGo Day1 Assignment
 - ✅ 彩⾊输出  
 - 其他：  
   - `-h` 查看帮助
+  - **输出结果已去重**
 
 ## Try These!
 - 编译release版本并查看帮助：`cargo clean && cargo run --release -- -h`
-- 查找`example_dir`下的所有`txt`文件：`./target/release/regex -p './example_dir' -r '.*\.txt'`  
-- 查找`example_dir`下的所有`txt`文件以及无后缀名，并显示详细搜索过程：`./target/release/regex -p './example_dir' -r '.*\.txt' '[^\.]*' -v`  
-- 查找`example_dir/subdir1`和`example_dir/subdir2`下的所有文件：`./target/release/regex -p './example_dir/subdir1' './example_dir/subdir2' -r '.*'`  
+- 查找`example_dir`下的所有`txt`文件：`regex -p './example_dir' -r '.*\.txt'`  
+- 查找`example_dir`下的所有`txt`文件以及无后缀名，并显示详细搜索过程：`regex -p './example_dir' -r '.*\.txt' '[^\.]*' -v`  
+- 查找`example_dir/subdir1`和`example_dir/subdir2`下的所有文件：`regex -p './example_dir/subdir1' './example_dir/subdir2' -r '.*'`  
+- 去重测试：`regex -p './example_dir/subdir1' -r '.*\.t' '.*\.txt' -v`
 
-## ScreenShot
+## ScreenShotExample
 ![success](static/image.png)

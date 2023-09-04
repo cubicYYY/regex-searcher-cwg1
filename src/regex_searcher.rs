@@ -3,6 +3,7 @@ type RegexVec = Vec<Regex>;
 use colored::*;
 use regex::Regex;
 use std;
+use std::collections::HashSet;
 use std::fs;
 use std::path::{Path, PathBuf};
 use std::process;
@@ -24,7 +25,7 @@ pub fn find(
     path_strs: &Vec<&String>,
     regex_strs: &Vec<&String>,
     is_verbose: bool,
-) -> Result<Vec<String>, Box<dyn std::error::Error>> {
+) -> Result<HashSet<String>, Box<dyn std::error::Error>> {
     // Pre-checks
     let mut paths: PathVec = Vec::with_capacity(path_strs.len());
     let mut regexes: RegexVec = Vec::with_capacity(regex_strs.len());
@@ -45,7 +46,7 @@ pub fn find(
         regexes.push(Regex::new(regex).unwrap());
     }
     info!("Search starting...");
-    let mut matches = Vec::new();
+    let mut matches = HashSet::new();
     for path in paths {
         walk_tree(path.as_ref(), regexes.as_ref(), &mut matches, 0, is_verbose)?;
     }
@@ -56,7 +57,7 @@ pub fn find(
 fn walk_tree(
     current: &Path,
     regexes: &RegexVec,
-    matches: &mut Vec<String>,
+    matches: &mut HashSet<String>,
     level: usize,
     is_verbose: bool,
 ) -> Result<(), Box<dyn std::error::Error>> {
@@ -77,7 +78,7 @@ fn walk_tree(
                     print!("|{}", String::from("--").repeat(level));
                     println!("{}", format!("[*] 匹配成功: {}", filename).green());
                 }
-                matches.push(get_full_name(&current));
+                matches.insert(get_full_name(&current));
             } else {
                 print!("|{}", String::from("--").repeat(level));
                 println!("{}", format!("[-] 检查: {}", filename));
