@@ -8,7 +8,7 @@ CloudWeGo Day1 Assignment
 
 ## Features实现情况
 
-- 重构到多个模块中  
+- ✅ 重构到多个模块中  
 - ✅ `–v`/`--verbose` 搜索过程与层级显示  
 - ✅ 同时⽀持匹配多个正则/给输出结果去重排序  
 - ✅ 尝试使⽤ tracing 库打⽇志  
